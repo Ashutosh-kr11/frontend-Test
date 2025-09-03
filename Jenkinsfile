@@ -14,7 +14,8 @@ pipeline {
         
         stage('Install Dependencies') {
             steps {
-                sh 'npm ci'
+                // Using npm install instead of npm ci since package-lock.json may not exist
+                sh 'npm install'
             }
         }
         
@@ -30,14 +31,14 @@ pipeline {
             emailext (
                 subject: "Build Success: React App",
                 body: "React application compilation succeeded.",
-                to: "${env.BUILD_USER_EMAIL}"
+                to: "ashutosh.devpro@gmail.com" // Replace with actual email address
             )
         }
         failure {
             emailext (
                 subject: "Build Failed: React App",
                 body: "React application compilation failed.",
-                to: "${env.BUILD_USER_EMAIL}"
+                to: "ashutosh.devpro@gmail.com" // Replace with actual email address
             )
         }
     }
