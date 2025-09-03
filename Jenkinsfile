@@ -25,6 +25,12 @@ pipeline {
                 sh 'CI=false npm run build'
             }
         }
+
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: 'build/**', fingerprint: true
+            }
+        }
     }
     
     post {
